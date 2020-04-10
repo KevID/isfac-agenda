@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice - Modifier événement{% endblock %}
+
+{% block frontBack %}
+    <a class="navbar-brand" href="{{ path('app_backoffice') }}">BACKOFFICE</a>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier l'événement</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.titre) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.dateHeure, { 'attr':{'readonly':true} }) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary btn-lg btn-block">{{ button_label|default('Modifier') }}</button>
+    {{ form_end(form) }}
+
+    <br>
+
+    <a href="{{ path('agenda_backoffice') }}" class="btn btn-secondary" >Retour à la liste</a>
+
+    <br><br>
+
+    <form method="post" action="{{ path('agenda_delete', {'id': agenda.id}) }}"
+          onsubmit="return confirm('Voulez-vous vraiement supprimer cet événement?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ agenda.id) }}">
+        <button class="btn btn-danger">Supprimer</button>
+    </form>
+
+{% endblock %}

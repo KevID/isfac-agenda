@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice - Accueil{% endblock %}
+
+{% block frontBack %}
+    <a class="navbar-brand" href="{{ path('app_backoffice') }}">BACKOFFICE</a>
+{% endblock %}
+
+{% block body %}
+    <h1>Mon espace personnel</h1>
+
+    <div class="list-group">
+        <a href="{{ path('agenda_backoffice') }}" class="list-group-item list-group-item-action">
+            Administrer mes événements
+        </a>
+        <a href="{{ path('agenda_new') }}" class="list-group-item list-group-item-action">Aouter un nouvel événement</a>
+        <a href="{{ path('app_change_password') }}" class="list-group-item list-group-item-action">Modifier mon mot de passe</a>
+        <a href="{{ path('app_logout') }}" class="list-group-item list-group-item-action">Me déconnecter</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ agenda.titre }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ agenda.titre }}</h1>
+
+    <p>{{ agenda.dateHeure|format_datetime('full', 'short', locale='fr') }}</p>
+
+    {% if agenda.image %}
+        <img src="{{ vich_uploader_asset(agenda, 'imageFile') }}" alt="Image {{ agenda.titre }}" style="width: 100%;
+             height: auto;">
+    {% endif %}
+
+    <p class="my-5">{{ agenda.description }}</p>
+
+    <hr>
+
+    <h2>Commentaire{{ agenda.agendaComments | length > 1 ? 's' : '' }} ({{ agenda.agendaComments | length }})</h2>
+
+    <ul class="list-unstyled">
+    {% for comment in agenda.agendaComments %}
+        <li class="media">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1"><strong>{{ comment.user.pseudo }}</strong></h5>
+                {{ comment.commentaire }}
+                <p><small>Publié le {{ comment.createdAt|format_datetime('medium', 'none', locale='fr') }}</small></p>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('agenda_comment_new', {'id': agenda.id}) }}" title="Commenter">Ajouter un commentaire</a>
+    {% else %}
+        <p>Vous devez être connecté pour pouvoir publier un commentaire.</p>
+    {% endif %}
+
+{% endblock %}

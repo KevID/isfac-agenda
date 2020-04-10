@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice - Nouvel événement{% endblock %}
+
+{% block frontBack %}
+    <a class="navbar-brand" href="{{ path('app_backoffice') }}">BACKOFFICE</a>
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un nouvel événement</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary btn-lg btn-block">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+
+    <br><br>
+
+    <a href="{{ path('agenda_backoffice') }}">Retour à la liste</a>
+{% endblock %}
